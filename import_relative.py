@@ -1,4 +1,4 @@
-import imp, os, sys
+import imp, os, re, sys
 def get_srcdir(level=1):
     ''' Get directory of caller as an absolute file name. `level' is
     the number of frames to look back.  So for import file which is
@@ -10,6 +10,8 @@ def get_srcdir(level=1):
     caller = sys._getframe(level)
     filename = caller.f_code.co_filename
     return os.path.normcase(os.path.dirname(os.path.abspath(filename)))
+
+re_dots = re.compile(r'^\.+$')
 
 def import_relative(import_name, path=None):
     '''Import `import_name' using `path' as the location to start
@@ -28,6 +30,14 @@ def import_relative(import_name, path=None):
     elif os.path.sep == path[0]:
         srcdir = path
     else:
+        # Check for ., .., ...
+        if re_dots.match(path):
+            d = os.path.pardir
+            for i in range(len(path)-2):
+                d = os.path.join(d, os.path.pardir)
+                pass
+            path = d
+            pass
         srcdir = os.path.abspath(os.path.join(get_srcdir(2), path))
         pass
 
@@ -44,12 +54,25 @@ def import_relative(import_name, path=None):
         
         fp, pathname, description = imp.find_module(top_module, [srcdir])
         
+        module_save = None
+        if sys.modules.get(top_module):
+            # Temporarily nuke module so we will have to find it anew using
+            # our hacked sys.path.
+            fn = sys.modules[top_module].__file__
+            if not fn.startswith(os.path.join(srcdir, top_module)):
+                module_save = sys.modules[top_module]
+                del sys.modules[top_module]
+                pass
+            pass
         try:
             mod = imp.load_module(top_module, fp, pathname, description)
         finally:
             # Since we may exit via an exception, close fp explicitly.
             if fp:
                 fp.close()
+                pass
+            if module_save:
+                sys.modules[top_module] = module_save
                 pass
             pass
         pass
@@ -110,7 +133,7 @@ if __name__=='__main__':
     # Can you say Major Major?
     import_relative2 = import_relative.import_relative('import_relative',
                                                        os.curdir)
-
+    
     # Originally done with os.path, But nosetest seems to run this.
     os2 = import_relative.import_relative('os2.path', 'test')
     print os2

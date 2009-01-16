@@ -41,6 +41,10 @@ class TestImportRelative(unittest.TestCase):
         os2 = ir.import_relative('os2.path')
         self.assertTrue('test.os2.path', os2.path.me)
 
+        ir = import_relative('import_relative', '..')
+        os2 = ir.import_relative('os2.path')
+        self.assertTrue('test.os2.path', os2.path.me)
+
         return
 
     pass
