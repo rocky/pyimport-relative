@@ -38,12 +38,12 @@ class TestImportRelative(unittest.TestCase):
         self.assertTrue(sys.modules.has_key('test-basic'))
 
         ir = import_relative('import_relative', os.pardir)
-        os2 = ir.import_relative('os2.path')
-        self.assertTrue('test.os2.path', os2.path.me)
+        os2_path = ir.import_relative('os2.path')
+        self.assertTrue('test.os2.path', os2_path.me)
 
         ir = import_relative('import_relative', '..')
-        os2 = ir.import_relative('os2.path')
-        self.assertTrue('test.os2.path', os2.path.me)
+        os2_path = ir.import_relative('os2.path')
+        self.assertTrue('test.os2.path', os2_path.me)
 
         return
 

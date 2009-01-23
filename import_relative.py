@@ -1,3 +1,20 @@
+# -*- coding: utf-8 -*-
+#   Copyright (C) 2009 Rocky Bernstein
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+#    02110-1301 USA.
 import imp, os, re, sys
 def get_srcdir(level=1):
     ''' Get directory of caller as an absolute file name. `level' is
@@ -16,9 +33,9 @@ re_dots = re.compile(r'^\.+$')
 def import_relative(import_name, path=None):
     '''Import `import_name' using `path' as the location to start
     looking for it.  If `path' is not given, we'll look starting in
-    the directory where the import_relative was issued. As per
-    __import__() which this uses, we alway return the top-level import
-    name even when a compound import (e.g. a.b.c) is given.  Sorry, we
+    the directory where the import_relative was issued. In contrast to
+    __import__() which this uses, we alway return the last import
+    module when a compound import (e.g. a.b.c) is given.  Sorry, we
     don't do "from lists", global or local variables here.
 
     TODO: add a package/namespace parameter for which to add the name under.
@@ -105,8 +122,6 @@ def import_relative(import_name, path=None):
         try:
             next_mod = __import__(name = prefix,
                                   fromlist=['__bogus__'])
-        except:
-            break
         finally:
             if module_save:
                 sys.modules[prefix] = module_save
@@ -121,7 +136,7 @@ def import_relative(import_name, path=None):
         prev = next_mod
         pass
 
-    return mod
+    return prev
 
 # Demo it
 if __name__=='__main__':
