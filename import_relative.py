@@ -28,8 +28,6 @@ def get_srcdir(level=1):
     filename = caller.f_code.co_filename
     return os.path.normcase(os.path.dirname(os.path.abspath(filename)))
 
-re_dots = re.compile(r'^\.+$')
-
 def import_relative(import_name, path=None):
     '''Import `import_name' using `path' as the location to start
     looking for it.  If `path' is not given, we'll look starting in
@@ -42,22 +40,35 @@ def import_relative(import_name, path=None):
     '''
 
     # Turn path into an absolute file name.
+    alldots = False
     if path is None:
         srcdir = get_srcdir(2)
     elif os.path.sep == path[0]:
         srcdir = path
     else:
         # Check for ., .., ...
-        if re_dots.match(path):
-            d = os.path.pardir
-            for i in range(len(path)-2):
-                d = os.path.join(d, os.path.pardir)
+        if '.' == path[0]: 
+            alldots = True
+            i = 1
+            pardir = '.'
+            for i in range(1,len(path)):
+                if path[i] != '.': 
+                    path = path[i:]
+                    alldots = False
+                    break
+                pardir = os.path.join(pardir, os.path.pardir)
                 pass
-            path = d
+            if alldots:
+                srcdir = os.path.abspath(os.path.join(get_srcdir(2), 
+                                                      path))
+            else:
+                srcdir = os.path.abspath(os.path.join(get_srcdir(2), 
+                                                      pardir, path))
+                pass
             pass
-        srcdir = os.path.abspath(os.path.join(get_srcdir(2), path))
+        else:
+            srcdir = os.path.abspath(path)
         pass
-
     import_modules = import_name.split('.')
     top_module = import_modules[0]
     last_module =  import_modules[-1]
@@ -140,21 +151,20 @@ def import_relative(import_name, path=None):
 
 # Demo it
 if __name__=='__main__':
-    import_relative = import_relative('import_relative')
-    print import_relative
-    print import_relative.__name__
-    print import_relative.__file__
+    Mimport_relative = import_relative('import_relative')
+    print Mimport_relative
+    print Mimport_relative.__name__
+    print Mimport_relative.__file__
     # The 2nd time around, we should have info cached.
     # Can you say Major Major?
-    import_relative2 = import_relative.import_relative('import_relative',
-                                                       os.curdir)
+    import_relative2 = Mimport_relative.import_relative('import_relative',
+                                                        '.')
     
     # Originally done with os.path, But nosetest seems to run this.
-    os2 = import_relative.import_relative('os2.path', 'test')
-    print os2
-    print os2.path
-    print os2.path.__name__
-    print os2.path.__file__
-    print os2.path.me
+    os2_path = Mimport_relative.import_relative('os2.path', 'test')
+    print os2_path
+    print os2_path.__name__
+    print os2_path.__file__
+    print os2_path.me
     # Warning. I've destroyed the real os.
     pass
