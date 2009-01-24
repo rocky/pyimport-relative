@@ -60,7 +60,7 @@ def import_relative(import_name, path=None):
                 pass
             if alldots:
                 srcdir = os.path.abspath(os.path.join(get_srcdir(2), 
-                                                      path))
+                                                      pardir))
             else:
                 srcdir = os.path.abspath(os.path.join(get_srcdir(2), 
                                                       pardir, path))
