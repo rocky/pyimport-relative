@@ -28,7 +28,27 @@ def get_srcdir(level=1):
     filename = caller.f_code.co_filename
     return os.path.normcase(os.path.dirname(os.path.abspath(filename)))
 
-def import_relative(import_name, path=None):
+def get_namespace(top_name, srcdir):
+    '''Return a compount 'import' based on srcdir and to stop
+    `top_name'.  Note: we assume packages don't have subdirectories
+    with the same name as the package. E.g. pydbg.pydbg or
+    pydbg.foo.pydbg is forbidden.  One remove that and by disallowing
+    the package name in the prefix of the directory but that does occur
+    e.g. /src/svn/pydbg/pydbg/lib. 
+    '''
+    srcdirs = srcdir.split(os.path.sep)
+    if top_name in srcdirs:
+        srcdirs.reverse()
+        prefix = srcdirs[:srcdirs.index(top_name)]
+        prefix.reverse()
+        if len(prefix) > 0:
+            return "%s.%s" % (top_name, '.'.join(prefix))
+        else:
+            return top_name
+        pass
+    return None
+
+def import_relative(import_name, path=None, top_name=None):
     '''Import `import_name' using `path' as the location to start
     looking for it.  If `path' is not given, we'll look starting in
     the directory where the import_relative was issued. In contrast to
@@ -69,12 +89,25 @@ def import_relative(import_name, path=None):
         else:
             srcdir = os.path.abspath(path)
         pass
+
+    if top_name:
+        namespace = get_namespace(top_name, srcdir)
+    else:
+        namespace = None
+        pass
+
     import_modules = import_name.split('.')
     top_module = import_modules[0]
     last_module =  import_modules[-1]
     top_file_prefix = os.path.join(srcdir, top_module)
-  
-    mod = sys.modules.get(top_module)
+
+    if namespace:
+        namespaced_top_module = "%s.%s" % (namespace, top_module)
+    else:
+        namespaced_top_module = top_module
+        pass
+
+    mod = sys.modules.get(namespaced_top_module)
     if not mod or not mod.__file__.startswith(top_file_prefix):
 
         # If any of the following calls raises an exception,
@@ -94,6 +127,9 @@ def import_relative(import_name, path=None):
             pass
         try:
             mod = imp.load_module(top_module, fp, pathname, description)
+            if namespace:
+                sys.modules[namespaced_top_module] = mod
+                pass
         finally:
             # Since we may exit via an exception, close fp explicitly.
             if fp:
@@ -101,6 +137,8 @@ def import_relative(import_name, path=None):
                 pass
             if module_save:
                 sys.modules[top_module] = module_save
+            elif namespace:
+                del sys.modules[top_module]
                 pass
             pass
         pass
@@ -120,8 +158,13 @@ def import_relative(import_name, path=None):
     del import_modules[0]
     for mod_name in import_modules:
         prefix += '.' + mod_name
+        if namespace:
+            namespaced_prefix = "%s.%s" % (namespace, prefix)
+        else:
+            namespaced_prefix = prefix
+            pass
         module_save = None
-        if sys.modules.get(prefix):
+        if sys.modules.get(namespaced_prefix):
             # Temporarily nuke module so we will have to find it anew using
             # our hacked sys.path.
             fn = sys.modules[prefix].__file__
@@ -133,9 +176,14 @@ def import_relative(import_name, path=None):
         try:
             next_mod = __import__(name = prefix,
                                   fromlist=['__bogus__'])
+            if namespace:
+                sys.modules[namespaced_prefix] = next_mod
+                pass
         finally:
             if module_save:
                 sys.modules[prefix] = module_save
+            elif namespace:
+                del sys.modules[prefix]
                 pass
             pass
         
@@ -151,6 +199,12 @@ def import_relative(import_name, path=None):
 
 # Demo it
 if __name__=='__main__':
+    print get_namespace('pydbg', '/src/pydbg/pydbg')
+    
+    Mtest = import_relative('test.os2.path', '.', 'pyimport-relative')
+
+    print get_namespace('pydbg', '/src/pydbg/pydbg/processor/commands')
+    
     Mimport_relative = import_relative('import_relative')
     print Mimport_relative
     print Mimport_relative.__name__
@@ -159,9 +213,11 @@ if __name__=='__main__':
     # Can you say Major Major?
     import_relative2 = Mimport_relative.import_relative('import_relative',
                                                         '.')
+
     
-    # Originally done with os.path, But nosetest seems to run this.
-    os2_path = Mimport_relative.import_relative('os2.path', 'test')
+    # Originally done with os.path, But nosetest seems to use this.
+    os2_path = Mimport_relative.import_relative('os2.path', 'test',
+                                                'import_relative')
     print os2_path
     print os2_path.__name__
     print os2_path.__file__
