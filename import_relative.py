@@ -137,7 +137,7 @@ def import_relative(import_name, path=None, top_name=None):
                 pass
             if module_save:
                 sys.modules[top_module] = module_save
-            elif namespace:
+            elif namespace and prefix in sys.modules:
                 del sys.modules[top_module]
                 pass
             pass
@@ -182,7 +182,7 @@ def import_relative(import_name, path=None, top_name=None):
         finally:
             if module_save:
                 sys.modules[prefix] = module_save
-            elif namespace:
+            elif namespace and prefix in sys.modules:
                 del sys.modules[prefix]
                 pass
             pass
