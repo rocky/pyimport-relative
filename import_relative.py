@@ -126,7 +126,13 @@ def import_relative(import_name, path=None, top_name=None):
                 pass
             pass
         try:
-            mod = imp.load_module(top_module, fp, pathname, description)
+            try:
+                mod = imp.load_module(namespaced_top_module, fp, pathname, 
+                                      description)
+            except SystemError:
+                mod = imp.load_module(top_module, fp, pathname, description)
+                pass
+
             if namespace:
                 sys.modules[namespaced_top_module] = mod
                 pass
