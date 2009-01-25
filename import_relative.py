@@ -116,13 +116,13 @@ def import_relative(import_name, path=None, top_name=None):
         fp, pathname, description = imp.find_module(top_module, [srcdir])
         
         module_save = None
-        if sys.modules.get(top_module):
+        if sys.modules.get(namespaced_top_module):
             # Temporarily nuke module so we will have to find it anew using
             # our hacked sys.path.
-            fn = sys.modules[top_module].__file__
+            fn = sys.modules[namespaced_top_module].__file__
             if not fn.startswith(os.path.join(srcdir, top_module)):
-                module_save = sys.modules[top_module]
-                del sys.modules[top_module]
+                module_save = sys.modules[namespaced_top_module]
+                del sys.modules[namespaced_top_module]
                 pass
             pass
         try:
@@ -137,7 +137,7 @@ def import_relative(import_name, path=None, top_name=None):
                 pass
             if module_save:
                 sys.modules[top_module] = module_save
-            elif namespace and prefix in sys.modules:
+            elif namespace and top_module in sys.modules:
                 del sys.modules[top_module]
                 pass
             pass
@@ -167,10 +167,10 @@ def import_relative(import_name, path=None, top_name=None):
         if sys.modules.get(namespaced_prefix):
             # Temporarily nuke module so we will have to find it anew using
             # our hacked sys.path.
-            fn = sys.modules[prefix].__file__
+            fn = sys.modules[namespaced_prefix].__file__
             if not fn.startswith(os.path.join(srcdir, top_module)):
-                module_save = sys.modules[prefix]
-                del sys.modules[prefix]
+                module_save = sys.modules[namespaced_prefix]
+                del sys.modules[namespaced_prefix]
                 pass
             pass
         try:
