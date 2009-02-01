@@ -11,6 +11,15 @@ def true(): return true
 
 class TestImportRelative(unittest.TestCase):
 
+    def test_path2abspath(self):
+        self.assertEqual(path2abspath('.', 2), 
+                         path2abspath('..test', 2))
+        self.assertEqual(path2abspath('test-basic.py', 2), 
+                         path2abspath('.test-basic.py', 2))
+        self.assertEqual(os.path.abspath(os.path.join(get_srcdir(), os.pardir)),
+                         path2abspath('...pyimport-relative', 2))
+        return
+
     def test_basic(self):
         """Basic sanity testing."""
         test_basic = import_relative('test-basic')

@@ -48,21 +48,11 @@ def get_namespace(top_name, srcdir):
         pass
     return None
 
-def import_relative(import_name, path=None, top_name=None):
-    '''Import `import_name' using `path' as the location to start
-    looking for it.  If `path' is not given, we'll look starting in
-    the directory where the import_relative was issued. In contrast to
-    __import__() which this uses, we alway return the last import
-    module when a compound import (e.g. a.b.c) is given.  Sorry, we
-    don't do "from lists", global or local variables here.
-
-    TODO: add a package/namespace parameter for which to add the name under.
-    '''
-
+def path2abspath(path, call_level):
     # Turn path into an absolute file name.
     alldots = False
     if path is None:
-        srcdir = get_srcdir(2)
+        srcdir = get_srcdir(call_level)
     elif os.path.sep == path[0]:
         srcdir = path
     else:
@@ -79,16 +69,30 @@ def import_relative(import_name, path=None, top_name=None):
                 pardir = os.path.join(pardir, os.path.pardir)
                 pass
             if alldots:
-                srcdir = os.path.abspath(os.path.join(get_srcdir(2), 
+                srcdir = os.path.abspath(os.path.join(get_srcdir(call_level), 
                                                       pardir))
             else:
-                srcdir = os.path.abspath(os.path.join(get_srcdir(2), 
+                srcdir = os.path.abspath(os.path.join(get_srcdir(call_level), 
                                                       pardir, path))
                 pass
             pass
         else:
             srcdir = os.path.abspath(path)
         pass
+    return srcdir
+
+def import_relative(import_name, path=None, top_name=None):
+    '''Import `import_name' using `path' as the location to start
+    looking for it.  If `path' is not given, we'll look starting in
+    the directory where the import_relative was issued. In contrast to
+    __import__() which this uses, we alway return the last import
+    module when a compound import (e.g. a.b.c) is given.  Sorry, we
+    don't do "from lists", global or local variables here.
+
+    TODO: add a package/namespace parameter for which to add the name under.
+    '''
+
+    srcdir = path2abspath(path, 3)
 
     if top_name:
         namespace = get_namespace(top_name, srcdir)
@@ -205,8 +209,8 @@ def import_relative(import_name, path=None, top_name=None):
 
 # Demo it
 if __name__=='__main__':
+    print path2abspath('.', 2)
     print get_namespace('pydbg', '/src/pydbg/pydbg')
-    
     Mtest = import_relative('test.os2.path', '.', 'pyimport-relative')
 
     print get_namespace('pydbg', '/src/pydbg/pydbg/processor/commands')
