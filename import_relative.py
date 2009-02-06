@@ -133,13 +133,11 @@ def import_relative(import_name, path=None, top_name=None):
             try:
                 mod = imp.load_module(namespaced_top_module, fp, pathname, 
                                       description)
-            except SystemError:
+            except (SystemError, ImportError):
                 mod = imp.load_module(top_module, fp, pathname, description)
                 pass
 
-            if namespace:
-                sys.modules[namespaced_top_module] = mod
-                pass
+            sys.modules[namespaced_top_module] = mod
         finally:
             # Since we may exit via an exception, close fp explicitly.
             if fp:
