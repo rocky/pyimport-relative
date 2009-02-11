@@ -161,7 +161,7 @@ def import_relative(import_name, path=None, top_name=None):
     # with "from .. import .. as .." renaming which would need to look
     # at __name__.
     
-    prefix = top_module
+    prefix = namespaced_top_module
     prev   = mod
     del import_modules[0]
     for mod_name in import_modules:
