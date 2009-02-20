@@ -26,7 +26,8 @@ def get_srcdir(level=1):
     '''
     caller = sys._getframe(level)
     filename = caller.f_code.co_filename
-    return os.path.normcase(os.path.dirname(os.path.abspath(filename)))
+    filename = os.path.normcase(os.path.dirname(os.path.abspath(filename)))
+    return os.path.realpath(filename)
 
 def get_namespace(top_name, srcdir):
     '''Return a compount 'import' based on srcdir and to stop
