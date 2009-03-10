@@ -18,6 +18,6 @@ install:
 test: check
 
 ChangeLog:
-	svn2cl --authors=svn2cl_usermap http://pyimport_relative.googlecode.com/svn/trunk -o $@
+	svn2cl --authors=svn2cl_usermap http://pyimport-relative.googlecode.com/svn/trunk -o $@
 
 .PHONY: $(PHONY)
