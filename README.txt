@@ -6,5 +6,3 @@ return the top-level import name even when a compound import
 (e.g. a.b.c) is given.  
 
 Sorry, we don't do "from lists", global or local variables here.
-
-TODO: add a package/namespace parameter for which to add the name under.
