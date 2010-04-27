@@ -16,8 +16,11 @@ class TestImportRelative(unittest.TestCase):
                          path2abspath('..test', 2))
         self.assertEqual(path2abspath('test-basic.py', 2), 
                          path2abspath('.test-basic.py', 2))
-        self.assertEqual(os.path.abspath(os.path.join(get_srcdir(), os.pardir)),
-                         path2abspath('...pyimport-relative', 2))
+        parent_dir = os.path.abspath(os.path.join(get_srcdir(), os.pardir))
+        basename   = os.path.basename(parent_dir)
+        import_rel = '...%s' % basename
+        self.assertEqual(parent_dir,
+                         path2abspath(import_rel, 2))
         return
 
     def test_basic(self):

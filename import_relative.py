@@ -50,7 +50,7 @@ def get_namespace(top_name, srcdir):
     return None
 
 def path2abspath(path, call_level):
-    # Turn path into an absolute file name.
+    '''Turn path into an absolute file name.'''
     alldots = False
     if path is None:
         srcdir = get_srcdir(call_level)
