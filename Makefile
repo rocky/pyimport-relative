@@ -28,6 +28,7 @@ distclean: clean
 install: 
 	$(PYTHON) ./setup.py install
 
+#: Same as check
 test: check
 
 ChangeLog:
