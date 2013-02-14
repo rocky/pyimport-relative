@@ -1,6 +1,9 @@
 # Compatibility for us old-timers.
 PHONY=check clean dist distclean test
 
+GIT2CL ?= git2cl
+PYTHON ?= python
+
 #: the default target - same as running "check"
 all: check
 
