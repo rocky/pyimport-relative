@@ -3,6 +3,7 @@ PHONY=check clean dist distclean test
 
 GIT2CL ?= git2cl
 PYTHON ?= python
+PYTHON3 ?= python3
 
 #: the default target - same as running "check"
 all: check
@@ -10,6 +11,7 @@ all: check
 #: Run all tests
 check: 
 	$(PYTHON) ./setup.py nosetests
+	$(PYTHON3) ./setup.py nosetests
 
 #: Clean up temporary files
 clean: 

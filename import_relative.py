@@ -208,16 +208,16 @@ def import_relative(import_name, path=None, top_name=None):
 
 # Demo it
 if __name__=='__main__':
-    print path2abspath('.', 2)
-    print get_namespace('pydbg', '/src/pydbg/pydbg')
-    Mtest = import_relative('test.os2.path', '.', 'pyimport-relative')
+    print(path2abspath('.', 2))
+    print(get_namespace('pydbg', '/src/pydbg/pydbg'))
+    Mtest = import_relative('test.os2.path', '.', 'import-relative')
 
-    print get_namespace('pydbg', '/src/pydbg/pydbg/processor/commands')
+    print(get_namespace('pydbg', '/src/pydbg/pydbg/processor/commands'))
     
     Mimport_relative = import_relative('import_relative')
-    print Mimport_relative
-    print Mimport_relative.__name__
-    print Mimport_relative.__file__
+    print(Mimport_relative)
+    print(Mimport_relative.__name__)
+    print(Mimport_relative.__file__)
     # The 2nd time around, we should have info cached.
     # Can you say Major Major?
     import_relative2 = Mimport_relative.import_relative('import_relative',
@@ -227,9 +227,9 @@ if __name__=='__main__':
     # Originally done with os.path, But nosetest seems to use this.
     os2_path = Mimport_relative.import_relative('os2.path', 'test',
                                                 'import_relative')
-    print os2_path
-    print os2_path.__name__
-    print os2_path.__file__
-    print os2_path.me
+    print(os2_path)
+    print(os2_path.__name__)
+    print(os2_path.__file__)
+    print(os2_path.me)
     # Warning. I've destroyed the real os.
     pass

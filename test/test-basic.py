@@ -47,7 +47,7 @@ class TestImportRelative(unittest.TestCase):
         self.assertTrue(test_basic.true(),
                         'should be able to use fns inside returned module')
 
-        self.assertTrue(sys.modules.has_key('test-basic'))
+        self.assertTrue('test-basic' in sys.modules)
 
         ir = import_relative('import_relative', os.pardir)
         os2_path = ir.import_relative('os2.path')
