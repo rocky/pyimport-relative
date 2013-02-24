@@ -1,7 +1,7 @@
 Introduction
 ============
 
-More akin to _require_relative_ of Ruby than Python's _import_relative_
+More akin to *require_relative* of Ruby than Python's *import_relative* .
 
 When you have a large package that contains nested submodules this allows the nested submodules to refer to one another without having to pull in or know much about or explicitly import entire top-level tree. 
 
@@ -29,7 +29,7 @@ Rationale
 
 In my development, each module (which is a file in Python) can be run standalone. When called as a main program, it runs demo code. Each module is responsible for importing those other modules it needs. 
 
-I have not been able to get relative imports to work nor have I been able to use importlib either in Python 2 or 3. They seem error out because they can't find upper levels or something like that.
+I have not been able to get relative imports to work nor have I been able to use *importlib* either in Python 2 or 3. They seem to error out because they can't find upper levels or something like that.
 
 Bugs
 ====
