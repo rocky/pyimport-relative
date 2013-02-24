@@ -1,2 +1,8 @@
+2013-02-24 
+
+- Add python3 support until I can figure out how to get
+  rid of this package altogether
+- Go over packaging
+
 2009-03-18 Initial "Ides of March" Release 
 

@@ -11,7 +11,7 @@ all: check
 #: Run all tests
 check: 
 	$(PYTHON) ./setup.py nosetests
-	$(PYTHON3) ./setup.py nosetests
+	[[ $(PYTHON3) != $(PYTHON) ]] && $(PYTHON3) ./setup.py nosetests || true
 
 #: Clean up temporary files
 clean: 
@@ -19,7 +19,7 @@ clean:
 
 #: Create source (tarball) and binary (egg) distribution
 dist: 
-	$(PYTHON) ./setup.py sdist bdist
+	$(PYTHON) ./setup.py sdist bdist_egg
 
 # It is too much work to figure out how to add a new command to distutils
 # to do the following. I'm sure distutils will someday get there.

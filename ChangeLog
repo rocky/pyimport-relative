@@ -1,84 +1,143 @@
-2009-03-10 02:11  rocky@gnu.org
+2013-02-24  rocky <rocky@gnu.org>
 
-	* ., .cvsignore, ChangeLog, Makefile, NEWS, svn2cl_usermap: Get
-	  ready for initial release
+	* Makefile, NEWS, README.txt, VERSION.py, __pkginfo__.py: Get ready
+	for release 0.2
 
-2009-02-20 11:17  rocky@gnu.org
+2013-02-24  rocky <rocky@gnu.org>
+
+	* Makefile, __init__.py, import_relative.py, svn2cl_usermap,
+	test/__init__.py, test/test-basic.py: Make 3k safe.
+
+2013-02-14  rocky <rocky@gnu.org>
+
+	* Makefile: Set reasonable default values for PYTHON and GIT2CL
+
+2013-01-04  rocky <rocky@gnu.org>
+
+	* Makefile: One more Makefile target
+
+2013-01-04  rocky <rocky@gnu.org>
+
+	* .cvsignore, .gitignore, Makefile: svn to git migration
+	administrivia
+
+2010-04-27  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
+
+	* import_relative.py, test/test-basic.py: import_relative.py: Python
+	sports docstrings unlike Ruby. Use them! test_basic.py: More
+	permissive about where code is checked-out/installed.  git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@19
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
+
+2009-03-15  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
+
+	* ChangeLog, README.txt, svn2cl_usermap: Get ready for release git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@17
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
+
+2009-03-10  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
+
+	* .cvsignore, ChangeLog, Makefile, NEWS, svn2cl_usermap: Get ready
+	for initial release git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@16
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
+
+2009-02-20  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
 	* import_relative.py: Need to realpath paths to canonicalize them.
-	  Will this never end?
+	Will this never end? git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@15
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-02-11 02:53  rocky@gnu.org
+2009-02-11  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
-	* import_relative.py: Need to use namespaced top_module
+	* import_relative.py: Need to use namespaced top_module git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@14
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-02-06 16:02  rocky@gnu.org
+2009-02-06  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
-	* import_relative.py: More bugs fixed. Really need to go over with
-	  a fine toothcomb
+	* import_relative.py: More bugs fixed. Really need to go over with a
+	fine toothcomb git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@13
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-02-01 23:25  rocky@gnu.org
+2009-02-01  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
 	* import_relative.py, test/test-basic.py: Modularize a tad better
-	  and add one unit test.
+	and add one unit test.  git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@12
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-01-25 14:09  rocky@gnu.org
+2009-01-25  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
-	* import_relative.py: More workarounds
+	* import_relative.py: More workarounds git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@11
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-01-25 08:04  rocky@gnu.org
+2009-01-25  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
-	* import_relative.py: See previous commit - this time for sure!
+	* import_relative.py: See previous commit - this time for sure! git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@10
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-01-25 07:57  rocky@gnu.org
+2009-01-25  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
 	* import_relative.py: See last change. Need to fix one more place.
-	  Probably should DRY code.
+	Probably should DRY code.  git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@9
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-01-24 11:06  rocky@gnu.org
+2009-01-24  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
 	* import_relative.py: Add namespace parameter so we can avoid
-	  namespace import conflicts
+	namespace import conflicts git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@8
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-01-24 00:20  rocky@gnu.org
+2009-01-24  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
-	* import_relative.py: Bug in handling only parent dirs
+	* import_relative.py: Bug in handling only parent dirs git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@7
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-01-23 19:58  rocky@gnu.org
+2009-01-23  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
 	* import_relative.py, test/test-basic.py: Allow a more 2.6 path
-	  designation.
+	designation.  git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@6
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-01-23 05:50  rocky@gnu.org
+2009-01-23  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
 	* import_relative.py, test/test-basic.py: Module returned is not
-	  *last* of compunt e.g. "path" in "os.path" rather than the first
-	  module
+	*last* of compunt e.g. "path" in "os.path" rather than the first
+	module git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@5
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-01-16 00:33  rocky@gnu.org
+2009-01-16  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
 	* import_relative.py, test/test-basic.py: Allow 2.6 ... notation.
-	  Need to nuke even top_module sometimes
+	Need to nuke even top_module sometimes git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@4
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-01-10 15:06  rocky@gnu.org
+2009-01-10  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
 	* Makefile, README.txt, __pkginfo__.py, import_relative.py,
-	  pyimport-relative, setup.cfg, setup.py, test: I checked this down
-	  one level too far.
+	pyimport-relative/Makefile, pyimport-relative/README.txt,
+	pyimport-relative/__pkginfo__.py,
+	pyimport-relative/import_relative.py, pyimport-relative/setup.cfg,
+	pyimport-relative/setup.py, pyimport-relative/test/Makefile,
+	pyimport-relative/test/__init__.py,
+	pyimport-relative/test/os2/__init__.py,
+	pyimport-relative/test/os2/path.py,
+	pyimport-relative/test/test-basic.py, setup.cfg, setup.py,
+	test/Makefile, test/__init__.py, test/os2/__init__.py,
+	test/os2/path.py, test/test-basic.py: I checked this down one level
+	too far.  git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@3
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-01-10 15:03  rocky@gnu.org
+2009-01-10  rocky.bernstein <rocky.bernstein@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
-	* pyimport-relative, pyimport-relative/Makefile,
-	  pyimport-relative/README.txt, pyimport-relative/__pkginfo__.py,
-	  pyimport-relative/import_relative.py,
-	  pyimport-relative/setup.cfg, pyimport-relative/setup.py,
-	  pyimport-relative/test, pyimport-relative/test/Makefile,
-	  pyimport-relative/test/__init__.py, pyimport-relative/test/os2,
-	  pyimport-relative/test/os2/__init__.py,
-	  pyimport-relative/test/os2/path.py,
-	  pyimport-relative/test/test-basic.py: Initial import.
+	* pyimport-relative/Makefile, pyimport-relative/README.txt,
+	pyimport-relative/__pkginfo__.py,
+	pyimport-relative/import_relative.py, pyimport-relative/setup.cfg,
+	pyimport-relative/setup.py, pyimport-relative/test/Makefile,
+	pyimport-relative/test/__init__.py,
+	pyimport-relative/test/os2/__init__.py,
+	pyimport-relative/test/os2/path.py,
+	pyimport-relative/test/test-basic.py: Initial import.  git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@2
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 
-2009-01-10 14:58  
+2009-01-10  (no author) <(no author)@23e9e55e-df27-11dd-87d8-31aa04531ed5>
 
-	* .: Initial directory structure.
+	* Initial directory structure.  git-svn-id: https://pyimport-relative.googlecode.com/svn/trunk@1
+	23e9e55e-df27-11dd-87d8-31aa04531ed5
 

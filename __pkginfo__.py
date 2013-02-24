@@ -1,4 +1,4 @@
-# Copyright (C) 2008, 2009 Rocky Bernstein <rocky@gnu.org>
+# Copyright (C) 2008-2009, 2013 Rocky Bernstein <rocky@gnu.org>
 #
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -16,10 +16,14 @@
 
 modname = 'import_relative'
 
-numversion = (0, 1, 0)
-version = '.'.join([str(num) for num in numversion])
+import os
+me = os.path.join(os.path.dirname(__file__), 'VERSION.py')
+exec(compile(open(me).read(), me, 'exec'))
 
-short_desc = '__import__ with a directory name to use to root import'
+version      = VERSION
+web          = 'http://code.google.com/p/pyimport-relative'
+
+short_desc = 'A different kind of relative import'
 
 author = "Rocky Bernstein"
 author_email = "rocky@gnu.org"
