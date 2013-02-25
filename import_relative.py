@@ -58,7 +58,6 @@ def path2abspath(path, call_level):
         srcdir = path
     else:
         # Check for ., .., ...
-        print('path', path, '. == path[0]', '.' == path[0])
         if '.' == path[0]: 
             alldots = True
             i = 1
