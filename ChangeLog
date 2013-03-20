@@ -1,7 +1,17 @@
 2013-02-24  rocky <rocky@gnu.org>
 
-	* Makefile, NEWS, README.txt, VERSION.py, __pkginfo__.py: Get ready
-	for release 0.2
+	* NEWS, import_relative.py: Get ready for release 0.2.1
+
+2013-02-24  rocky <rocky@gnu.org>
+
+	* README.txt, VERSION.py: Bump version. README.txt formating
+
+2013-02-24  rocky <rocky@gnu.org>
+
+	* ChangeLog, Makefile, NEWS, README.txt, VERSION.py,
+	__pkginfo__.py, import_relative.py: import_relative.py: 3k may do
+	os.path.abspath differently for simple filename without pathsep or
+	dots. Get ready for release 0.2.
 
 2013-02-24  rocky <rocky@gnu.org>
 

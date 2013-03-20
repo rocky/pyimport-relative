@@ -1,5 +1,5 @@
 # Compatibility for us old-timers.
-PHONY=check clean dist distclean test
+PHONY=check clean dist distclean test rmChangeLog
 
 GIT2CL ?= git2cl
 PYTHON ?= python
@@ -36,7 +36,10 @@ install:
 #: Same as check
 test: check
 
-ChangeLog:
+ChangeLog: rmChangeLog
 	git log --pretty --numstat --summary | $(GIT2CL) >$@
+
+rmChangeLog: 
+	rm ChangeLog || true
 
 .PHONY: $(PHONY)
