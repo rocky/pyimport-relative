@@ -1,3 +1,17 @@
+2013-03-21  rocky <rocky@gnu.org>
+
+	* ChangeLog, NEWS, VERSION.py: Get ready for release 0.2.2
+
+2013-03-20  rocky <rocky@gnu.org>
+
+	* ChangeLog, MANIFEST.in, Makefile, VERSION.py: May need a
+	MANIFEST.in file
+
+2013-03-20  rocky <rocky@gnu.org>
+
+	* : commit 9ea7a8cbc49d5bfe5886430c4c7cc7d2a27764d9 Author: rocky
+	<rocky@gnu.org> Date:   Sun Feb 24 20:45:36 2013 -0500
+
 2013-02-24  rocky <rocky@gnu.org>
 
 	* NEWS, import_relative.py: Get ready for release 0.2.1
