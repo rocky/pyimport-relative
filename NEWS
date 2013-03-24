@@ -1,3 +1,7 @@
+2013-03-24 0.2.3
+- Make it work from Python 2.4 through 3.3!
+- Better error message of what exact file was tried when __import__() fails.
+
 2013-02-24 0.2.2
 - Add some missing files from the distribution
 
