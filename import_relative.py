@@ -13,7 +13,7 @@
 #
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-import imp, os, re, sys
+import imp, os, sys
 def get_srcdir(level=1):
     """Get directory of caller as an absolute file name. *level* is
     the number of frames to look back.  So for import file which is
@@ -115,7 +115,6 @@ def import_relative(import_name, path=None, top_name=None):
 
     import_modules = import_name.split('.')
     top_module = import_modules[0]
-    last_module =  import_modules[-1]
     top_file_prefix = os.path.join(srcdir, top_module)
 
     if namespace:
@@ -198,8 +197,7 @@ def import_relative(import_name, path=None, top_name=None):
                 pass
             pass
         try:
-            next_mod = __import__(name = prefix,
-                                  fromlist=['__bogus__'])
+            next_mod = __import__(prefix, None, None, ['__bogus__'])
             if namespace:
                 sys.modules[namespaced_prefix] = next_mod
                 pass
