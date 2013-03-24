@@ -1,3 +1,28 @@
+2013-03-24  rocky <rocky@gnu.org>
+
+	* ChangeLog, VERSION.py: Get ready for release 0.2.3
+
+2013-03-24  rocky <rocky@gnu.org>
+
+	* NEWS, __init__.py, make-check-filter.py: __init__.py: Add basic
+	doc. make-check-filter.py: to make "make check-short" work. NEWS:
+	what changed.
+
+2013-03-24  rocky <rocky@gnu.org>
+
+	* MANIFEST.in, Makefile: Makefile: Add check and check-short
+	targets. MANIFEST.in: sort lines
+
+2013-03-24  rocky <rocky@gnu.org>
+
+	* import_relative.py: Make it work on Python 2.4
+
+2013-03-24  rocky <rocky@gnu.org>
+
+	* COPYING, MANIFEST.in, VERSION.py, import_relative.py: Give a more
+	informative messages when we can't find an import. Go over
+	packaging.
+
 2013-03-21  rocky <rocky@gnu.org>
 
 	* ChangeLog, NEWS, VERSION.py: Get ready for release 0.2.2
